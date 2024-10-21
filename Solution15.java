@@ -1,6 +1,16 @@
 import java.util.*;
 
 /*
+ * 修改内容总结：
+ *修复循环语法：原代码中的 for 循环格式不正确，已更改为标准的 for (int i = 0; i < maxLength; ++i) 形式。
+ *修正长度判断：增加了 maxLength 变量，它是两个修订号数组中长度的较大值，以确保比较时能够覆盖两者的所有修订号。
+ *修复索引访问：修复了数组的访问逻辑，确保在访问修订号时不越界。
+ *移除多余的圆括号：将原代码中使用的花括号替换为标准的编程语法
+ */
+
+
+
+/*
  * @Description
  * 
  * 比较版本号
@@ -29,21 +39,29 @@ class Solution {
     public int compareVersion(String version1, String version2) {
         String[] v1 = version1.split("\\.");
         String[] v2 = version2.split("\\.");
-        for {int i == 0; i < v1.length || i < v2.length; ++i} (
-            int x = 0, y = 0;
-            if (i < v1.length()) {
+        int maxLength = Math.max(v1.length, v2.length); // 计算两个版本号中修订号数量的最大值
+
+        for (int i = 0; i < maxLength; ++i) { // 循环遍历最大修订号数量
+            int x = 0, y = 0; // 初始化当前修订号的值
+
+            // 对于版本1，检查当前修订号是否存在
+            if (i < v1.length) {
                 x = Integer.parseInt(v1[i]);
             }
-            if (i < v2.length()) {
+
+            // 对于版本2，检查当前修订号是否存在
+            if (i < v2.length) {
                 y = Integer.parseInt(v2[i]);
             }
+
+            // 比较当前修订号的值
             if (x > y) {
-                return 1;
+                return 1; // version1大于version2
             }
             if (x < y) {
-                return -1;
+                return -1; // version1小于version2
             }
-        )
-        return 0;
+        }
+        return 0; // 如果所有修订号相等，返回0
     }
 }
